@@ -9,7 +9,7 @@
         <p>Todo para organizar tus discos </p>
     <a href="@Url.Action("Index","Home")" class="btn btn-outline-primary">Admin</a>
     </div>
-<div class="bg-image card shadow-1-strong text-white" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/f/f0/45rpm.jpg');height: 200px; width: 200px; background-size: cover;float:left;">
+<div class="bg-image card shadow-1-strong text-white" style="background-image: url('@Url.Content("~/Content/Img/disco.jpg")');height: 200px; width: 200px; background-size: cover;float:left;">
     <h1 class="card-title " style="position: absolute; bottom:0px; left:40px; margin-bottom:-5px;">
         <p><a href="@Url.Action("Error","Home")" class=" link-success bg-dark">Discos </a></p>
      
@@ -17,13 +17,13 @@
     
 </div>
 
-<div class="bg-image card  text-white" style="background-image: url('https://www.eltiempo.com/files/main_video_image/uploads/2018/04/16/5ad4e7a0ef4d2.jpeg');height: 200px; width: 200px; background-size: cover;float:left;">
+<div class="bg-image card  text-white" style="background-image: url('@Url.Content("~/Content/Img/artistas.jpeg")');height: 200px; width: 200px; background-size: cover;float:left;">
     <h1 class="card-title" style="position: absolute; bottom:0px; left:40px;">
         <a class="link-success bg-dark" href="@Url.Action("Error","Home")">Albunes </a>
     </h1>
 </div>
 
-<div class="bg-image card shadow-1-strong text-white" style="background-image: url('https://ps.w.org/login-customizer/assets/icon-256x256.png?rev=2455454');height: 200px; width: 200px; background-size: cover;float:left;">
+    <div class="bg-image card shadow-1-strong text-white" style="background-image: url('@Url.Content("~/Content/Img/login.png")');height: 200px; width: 200px; background-size: cover;float:left;">
     <h1 class="card-title" style="position: absolute; bottom:0px; left:40px;">
         <a class="link-success bg-dark"  href="@Url.Action("Error","Home")">Login </a>
     </h1>
