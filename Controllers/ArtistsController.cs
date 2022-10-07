@@ -21,7 +21,7 @@ namespace AT02_4_GaldonMario_Musica.Controllers
         // GET: Artists
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Artists.ToListAsync());
+              return View(await _context.Artists.Take(15).ToListAsync());
         }
 
         // GET: Artists/Details/5
@@ -157,5 +157,12 @@ namespace AT02_4_GaldonMario_Musica.Controllers
         {
           return _context.Artists.Any(e => e.ArtistId == id);
         }
+
+        public IActionResult DiscoArtista(int id)
+        {
+           List<Album> DiscoArtista= _context.Albums.Where(Album => Album.ArtistId == id).Include(Album=> Album.Artist).ToList();
+            return View(DiscoArtista);
+        }
+        
     }
 }

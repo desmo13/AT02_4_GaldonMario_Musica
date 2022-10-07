@@ -1,0 +1,36 @@
+﻿@model IEnumerable<AT02_4_GaldonMario_Musica.Models.Album>
+
+@{
+    ViewData["Title"] = "DiscoArtista";
+}
+
+<h1>DiscoArtista</h1>
+
+<p>
+    
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Artist)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Artist.Name)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
