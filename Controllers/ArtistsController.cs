@@ -143,23 +143,25 @@ namespace AT02_4_GaldonMario_Musica.Controllers
             {
                 return Problem("Entity set 'ChinookContext.Artists'  is null.");
             }
-            var artist =  _context.Artists.Where(a=>a.ArtistId==id);
+            var artist =  _context.Artists.Where(a=>a.ArtistId==id).ToList();
             //  _context.Albums.Where(a => a.ArtistId == id);
 
             if (artist != null )
             {
                 try
                 {
-                    var album =  _context.Artists.Where(a => a.ArtistId == id).ToList();
+                    var album =  _context.Albums.Where(a => a.ArtistId == id).ToList();
                     
                     if (album != null)
                     {
+                        
                         album.ForEach(a =>
                         {
-                            a.ArtistId = 0;
+                            a.ArtistId = -1;
 
                         });
-                        _context.Artists.UpdateRange(album);
+                        artist.ForEach(artista => artista.ArtistId = -1) ;
+                        _context.Albums.RemoveRange(album);
                         _context.Artists.RemoveRange(artist);
 
                     }

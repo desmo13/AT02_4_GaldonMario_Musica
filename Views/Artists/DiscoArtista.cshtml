@@ -4,7 +4,7 @@
     ViewData["Title"] = "DiscoArtista";
 }
 
-<h1>DiscoArtista</h1>
+<h1 class="text-light">DiscoArtista</h1>
 
 <p>
     
@@ -12,11 +12,11 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
+            <th class="text-light">
+                Titulo
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Artist)
+            <th class="text-light">
+                Artista
             </th>
             <th></th>
         </tr>
@@ -24,10 +24,10 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+                <td class="text-light">
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
-            <td>
+                <td class="text-light">
                 @Html.DisplayFor(modelItem => item.Artist.Name)
             </td>
         </tr>
