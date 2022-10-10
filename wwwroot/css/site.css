@@ -9,10 +9,13 @@ html {
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
+    background-color:black;
+    background-image: url("../Content/Img/asfalt-light.png");
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+
 }

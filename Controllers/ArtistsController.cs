@@ -21,7 +21,7 @@ namespace AT02_4_GaldonMario_Musica.Controllers
         // GET: Artists
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Artists.Take(15).ToListAsync());
+              return View(await _context.Artists.OrderByDescending(a=>a.ArtistId).Take(15).ToListAsync());
         }
 
         // GET: Artists/Details/5
@@ -143,10 +143,34 @@ namespace AT02_4_GaldonMario_Musica.Controllers
             {
                 return Problem("Entity set 'ChinookContext.Artists'  is null.");
             }
-            var artist = await _context.Artists.FindAsync(id);
-            if (artist != null)
+            var artist =  _context.Artists.Where(a=>a.ArtistId==id);
+            //  _context.Albums.Where(a => a.ArtistId == id);
+
+            if (artist != null )
             {
-                _context.Artists.Remove(artist);
+                try
+                {
+                    var album =  _context.Artists.Where(a => a.ArtistId == id).ToList();
+                    
+                    if (album != null)
+                    {
+                        album.ForEach(a =>
+                        {
+                            a.ArtistId = 0;
+
+                        });
+                        _context.Artists.UpdateRange(album);
+                        _context.Artists.RemoveRange(artist);
+
+                    }
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+
+                }
+               
+
+                //.Albums.Remove(album);
             }
             
             await _context.SaveChangesAsync();
