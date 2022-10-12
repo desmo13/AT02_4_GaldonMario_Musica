@@ -2,6 +2,7 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
@@ -21,11 +22,15 @@ namespace AT02_4_GaldonMario_Musica.Models
         public int AlbumId { get; set; }
         [Required]
         [StringLength(160)]
+        [MinLength(3,ErrorMessage ="La longitud minima de el campo titulo es de 3 caracteres")]
+        [DisplayName("Titulo")]
         public string Title { get; set; }
+        [DisplayName("Artista")]
         public int ArtistId { get; set; }
 
         [ForeignKey("ArtistId")]
         [InverseProperty("Albums")]
+        [DisplayName("Artista")]
         public virtual Artist Artist { get; set; }
         [InverseProperty("Album")]
         public virtual ICollection<Track> Tracks { get; set; }

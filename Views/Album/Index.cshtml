@@ -31,7 +31,9 @@
                 @Html.DisplayFor(modelItem => item.Artist.Name)
             </td>
             <td>
-
+                    <a asp-action="Details" asp-route-id="@item.AlbumId">Detalles</a> |
+                    <a asp-action="Edit" asp-route-id="@item.AlbumId">Editar</a> |
+                    <a asp-action="Delete" asp-route-id="@item.AlbumId">Borrar</a>
             </td>
         </tr>
 }

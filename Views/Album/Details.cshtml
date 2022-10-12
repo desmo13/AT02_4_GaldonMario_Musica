@@ -1,0 +1,30 @@
+﻿@model AT02_4_GaldonMario_Musica.Models.Album
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class="text-light">Detalles</h1>
+
+<div class=" text-light">
+    <h4 class="text-light">Album</h4>
+    <hr />
+    <dl class="row class=" text-light"">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Artist)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Artist.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.AlbumId">Editar</a> |
+    <a asp-action="Index">Volver a la lista</a>
+</div>

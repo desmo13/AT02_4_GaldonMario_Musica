@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AT02_4_GaldonMario_Musica.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using AT02_4_GaldonMario_Musica.Models;
 
 namespace AT02_4_GaldonMario_Musica.Controllers
 {
@@ -21,7 +16,7 @@ namespace AT02_4_GaldonMario_Musica.Controllers
         // GET: Artists
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Artists.OrderByDescending(a=>a.ArtistId).Take(15).ToListAsync());
+            return View(await _context.Artists.OrderByDescending(a => a.ArtistId).Take(15).ToListAsync());
         }
 
         // GET: Artists/Details/5
@@ -55,7 +50,7 @@ namespace AT02_4_GaldonMario_Musica.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name")] Artist artist)
         {
-            artist.ArtistId= _context.Artists.Max(Artist => Artist.ArtistId)+1;
+            artist.ArtistId = _context.Artists.Max(Artist => Artist.ArtistId) + 1;
             if (ModelState.IsValid)
             {
                 _context.Add(artist);
@@ -143,52 +138,73 @@ namespace AT02_4_GaldonMario_Musica.Controllers
             {
                 return Problem("Entity set 'ChinookContext.Artists'  is null.");
             }
-            var artist =  _context.Artists.Where(a=>a.ArtistId==id).ToList();
-            //  _context.Albums.Where(a => a.ArtistId == id);
 
-            if (artist != null )
+
+            try
             {
-                try
-                {
-                    var album =  _context.Albums.Where(a => a.ArtistId == id).ToList();
-                    
-                    if (album != null)
-                    {
-                        
-                        album.ForEach(a =>
-                        {
-                            a.ArtistId = -1;
 
-                        });
-                        artist.ForEach(artista => artista.ArtistId = -1) ;
-                        _context.Albums.RemoveRange(album);
-                        _context.Artists.RemoveRange(artist);
+                var artist = await _context.Artists.FirstOrDefaultAsync(a => a.ArtistId == id);
+                if (artist != null)
+                {
+                    _context.Artists.Remove(artist);
+                    await _context.SaveChangesAsync();
+                }
+                var album = await _context.Albums.FirstOrDefaultAsync(a => a.ArtistId == id);
+               
+                if (album != null)
+                {
+                    var tracks = await _context.Tracks.FirstOrDefaultAsync(a => a.AlbumId == album.AlbumId);
+                    _context.Albums.Remove(album);
+                    await _context.SaveChangesAsync();
+                    if (tracks != null)
+                    {
+                        _context.Tracks.Remove(tracks);
+                        await _context.SaveChangesAsync();
+
+
+
+
 
                     }
+
+
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-
+                    return RedirectToAction(nameof(Index));
                 }
-               
+              
 
-                //.Albums.Remove(album);
+
+
+
+
+
             }
-            
-            await _context.SaveChangesAsync();
+            catch
+            {
+                ViewData["Error"] = "Error no se puede eliminar un album que tenga factura";
+                return View();
+            }
+
+
+
+
+
+            //await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ArtistExists(int id)
         {
-          return _context.Artists.Any(e => e.ArtistId == id);
+            return _context.Artists.Any(e => e.ArtistId == id);
         }
 
         public IActionResult DiscoArtista(int id)
         {
-           List<Album> DiscoArtista= _context.Albums.Where(Album => Album.ArtistId == id).Include(Album=> Album.Artist).ToList();
+            List<Album> DiscoArtista = _context.Albums.Where(Album => Album.ArtistId == id).Include(Album => Album.Artist).ToList();
             return View(DiscoArtista);
         }
-        
+
     }
 }

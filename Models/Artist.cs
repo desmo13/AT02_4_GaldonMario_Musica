@@ -2,6 +2,7 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
@@ -17,8 +18,12 @@ namespace AT02_4_GaldonMario_Musica.Models
         }
 
         [Key]
+        [DisplayName("Artista")]
         public int ArtistId { get; set; }
         [StringLength(120)]
+        [MaxLength(16,ErrorMessage ="El maximo de caracteres es 16")]
+        [MinLength(3,ErrorMessage ="EL minimo de caracteres es 3 ")]
+        [DisplayName("Nombre")]
         public string Name { get; set; }
 
         [InverseProperty("Artist")]
