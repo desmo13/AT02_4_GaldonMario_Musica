@@ -49,9 +49,9 @@ namespace AT02_4_GaldonMario_Musica.Controllers
             {
                 return NotFound();
             }
-            var albumTracks = await _context.Albums.FirstOrDefaultAsync(a => a.AlbumId == id);
+            var albumTracks = await _context.Albums.Include(a=>a.Tracks).FirstOrDefaultAsync(a => a.AlbumId == id);
 
-            var artist = await _context.Artists.FindAsync(albumTracks.ArtistId);
+           var artist = await _context.Artists.FindAsync(albumTracks.ArtistId);
             if (albumTracks == null)
             {
                 return NotFound();

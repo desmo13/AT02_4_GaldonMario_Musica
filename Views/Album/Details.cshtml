@@ -14,17 +14,89 @@
             @Html.DisplayNameFor(model => model.Title)
         </dt>
         <dd class = "col-sm-10">
+
             @Html.DisplayFor(model => model.Title)
+        
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Artist)
         </dt>
         <dd class = "col-sm-10">
+
             @Html.DisplayFor(model => model.Artist.Name)
+        
         </dd>
     </dl>
 </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Nombre
+            </th>
+            <th>
+                Compositor
+            </th>
+            <th>
+                Tiempo
+            </th>
+            <th>
+                Bytes
+            </th>
+            <th>
+                Precio
+            </th>
+            <th>
+                Album
+            </th>
+            <th>
+                Genero
+            </th>
+            <th>
+                Tipo de Medio
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Tracks)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Composer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Milliseconds)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bytes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Album.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre.GenreId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MediaType.MediaTypeId)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.TrackId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.TrackId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.TrackId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.AlbumId">Editar</a> |
+    
     <a asp-action="Index">Volver a la lista</a>
 </div>
