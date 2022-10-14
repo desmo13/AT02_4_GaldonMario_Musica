@@ -9,7 +9,7 @@
 <div class=" text-light">
     <h4 class="text-light">Album</h4>
     <hr />
-    <dl class="row class=" text-light"">
+    <dl class="row  text-light">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Title)
         </dt>
@@ -29,7 +29,7 @@
     </dl>
 </div>
 
-<table class="table">
+<table class="table text-light">
     <thead>
         <tr>
             <th>
@@ -81,22 +81,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Album.Title)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Genre.GenreId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MediaType.MediaTypeId)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.TrackId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.TrackId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.TrackId">Delete</a>
-                </td>
+
             </tr>
         }
     </tbody>
 </table>
 <div>
     
-    <a asp-action="Index">Volver a la lista</a>
+    <a asp-action="Index" class="text-light">Volver a la lista</a>
 </div>
