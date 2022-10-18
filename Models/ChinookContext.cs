@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace AT02_4_GaldonMario_Musica.Models
+namespace MusicaAut_GaldonMario.Models
 {
     public partial class ChinookContext : DbContext
     {

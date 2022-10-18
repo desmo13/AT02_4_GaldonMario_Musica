@@ -1,9 +1,14 @@
-﻿@model IEnumerable<AT02_4_GaldonMario_Musica.Models.Album>
+﻿@model IEnumerable<MusicaAut_GaldonMario.Models.Album>
+@using Microsoft.AspNetCore.Identity
+@using MusicaAut_GaldonMario.Areas.Identity.Data
 
+@inject SignInManager<AuthUser> SignInManager
+@inject UserManager<AuthUser> UserManager
 @{
     ViewData["Title"] = "Index";
 }
-
+@if (SignInManager.IsSignedIn(User))
+{
 <h1 class="text-light">Lista</h1>
 
 <p>
@@ -39,3 +44,10 @@
 }
     </tbody>
 </table>
+}
+else
+{
+    <h1>Tienes que estar logeado </h1>
+    <a class="link-success bg-dark" asp-area="Identity" asp-page="/Account/Login">Login </a>
+    
+}

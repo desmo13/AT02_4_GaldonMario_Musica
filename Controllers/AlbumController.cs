@@ -1,9 +1,11 @@
-﻿using AT02_4_GaldonMario_Musica.Models;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MusicaAut_GaldonMario.Models;
+using System.Data;
 
-namespace AT02_4_GaldonMario_Musica.Controllers
+namespace MusicaAut_GaldonMario.Controllers
 {
     public class AlbumController : Controller
     {
@@ -21,12 +23,14 @@ namespace AT02_4_GaldonMario_Musica.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Manager,Administrator")]
         public IActionResult CreateAlbum()
         {
             ViewBag.ArtistId = new SelectList(_context.Artists, "ArtistId", "Name");
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = "Manager,Administrator")]
         public IActionResult CreateAlbum(Album album)
         {
             album.AlbumId = _context.Albums.Max(Album => Album.AlbumId) + 1;
@@ -49,9 +53,9 @@ namespace AT02_4_GaldonMario_Musica.Controllers
             {
                 return NotFound();
             }
-            var albumTracks = await _context.Albums.Include(a=>a.Tracks).FirstOrDefaultAsync(a => a.AlbumId == id);
+            var albumTracks = await _context.Albums.Include(a => a.Tracks).FirstOrDefaultAsync(a => a.AlbumId == id);
 
-           var artist = await _context.Artists.FindAsync(albumTracks.ArtistId);
+            var artist = await _context.Artists.FindAsync(albumTracks.ArtistId);
             if (albumTracks == null)
             {
                 return NotFound();
@@ -60,6 +64,7 @@ namespace AT02_4_GaldonMario_Musica.Controllers
             return View(albumTracks);
         }
 
+        [Authorize(Roles = "Manager,Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Albums == null)
@@ -78,6 +83,7 @@ namespace AT02_4_GaldonMario_Musica.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager,Administrator")]
         public async Task<IActionResult> Edit(int id, [Bind("AlbumId,Title,ArtistId")] Album album)
         {
             if (id != album.AlbumId)
@@ -112,7 +118,7 @@ namespace AT02_4_GaldonMario_Musica.Controllers
             return _context.Albums.Any(e => e.AlbumId == id);
         }
 
-
+        [Authorize(Roles = "Manager,Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Albums == null)
@@ -134,6 +140,7 @@ namespace AT02_4_GaldonMario_Musica.Controllers
         // POST: Artists/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager,Administrator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Albums == null)
@@ -149,7 +156,7 @@ namespace AT02_4_GaldonMario_Musica.Controllers
 
                 var album = await _context.Albums.FirstOrDefaultAsync(a => a.AlbumId == id);
                 var tracks = await _context.Tracks.FirstOrDefaultAsync(a => a.AlbumId == album.AlbumId);
-                
+
 
                 if (tracks != null)
                 {

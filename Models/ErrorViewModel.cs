@@ -1,4 +1,4 @@
-namespace AT02_4_GaldonMario_Musica.Models
+namespace MusicaAut_GaldonMario.Models
 {
     public class ErrorViewModel
     {

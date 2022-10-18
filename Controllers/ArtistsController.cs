@@ -1,8 +1,10 @@
-﻿using AT02_4_GaldonMario_Musica.Models;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MusicaAut_GaldonMario.Models;
+using System.Data;
 
-namespace AT02_4_GaldonMario_Musica.Controllers
+namespace MusicaAut_GaldonMario.Controllers
 {
     public class ArtistsController : Controller
     {
@@ -38,6 +40,7 @@ namespace AT02_4_GaldonMario_Musica.Controllers
         }
 
         // GET: Artists/Create
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
@@ -48,6 +51,7 @@ namespace AT02_4_GaldonMario_Musica.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create([Bind("Name")] Artist artist)
         {
             artist.ArtistId = _context.Artists.Max(Artist => Artist.ArtistId) + 1;
@@ -61,6 +65,7 @@ namespace AT02_4_GaldonMario_Musica.Controllers
         }
 
         // GET: Artists/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Artists == null)
@@ -81,6 +86,7 @@ namespace AT02_4_GaldonMario_Musica.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int id, [Bind("ArtistId,Name")] Artist artist)
         {
             if (id != artist.ArtistId)
@@ -112,6 +118,7 @@ namespace AT02_4_GaldonMario_Musica.Controllers
         }
 
         // GET: Artists/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Artists == null)
@@ -132,6 +139,7 @@ namespace AT02_4_GaldonMario_Musica.Controllers
         // POST: Artists/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Artists == null)
@@ -150,7 +158,7 @@ namespace AT02_4_GaldonMario_Musica.Controllers
                     await _context.SaveChangesAsync();
                 }
                 var album = await _context.Albums.FirstOrDefaultAsync(a => a.ArtistId == id);
-               
+
                 if (album != null)
                 {
                     var tracks = await _context.Tracks.FirstOrDefaultAsync(a => a.AlbumId == album.AlbumId);
@@ -173,7 +181,7 @@ namespace AT02_4_GaldonMario_Musica.Controllers
                 {
                     return RedirectToAction(nameof(Index));
                 }
-              
+
 
 
 

@@ -1,8 +1,8 @@
-﻿using AT02_4_GaldonMario_Musica.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using MusicaAut_GaldonMario.Models;
 using System.Diagnostics;
 
-namespace AT02_4_GaldonMario_Musica.Controllers
+namespace MusicaAut_GaldonMario.Controllers
 {
     public class HomeController : Controller
     {

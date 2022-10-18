@@ -1,36 +1,47 @@
-﻿@model IEnumerable<AT02_4_GaldonMario_Musica.Models.Artist>
+﻿@model IEnumerable<MusicaAut_GaldonMario.Models.Artist>
+@using Microsoft.AspNetCore.Identity
+@using MusicaAut_GaldonMario.Areas.Identity.Data
 
+@inject SignInManager<AuthUser> SignInManager
+@inject UserManager<AuthUser> UserManager
 @{
     ViewData["Title"] = "Index";
 }
+@if (SignInManager.IsSignedIn(User))
+{
+    <h1 class="text-light">Lista</h1>
 
-<h1 class="text-light">Lista</h1>
-
-<p>
-    <a asp-action="Create">Crear Nuevo</a>
-</p>
-<table class="table text-light">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ArtistId">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.ArtistId">Detalles</a> |
-                <a asp-action="Delete" asp-route-id="@item.ArtistId">Borrar</a>
-                <a asp-action="DiscoArtista" asp-route-id="@item.ArtistId">Discos de Artista </a>
-            </td>
-        </tr>
+    <p>
+        <a asp-action="Create">Crear Nuevo</a>
+    </p>
+    <table class="table text-light">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ArtistId">Editar</a> |
+                        <a asp-action="Details" asp-route-id="@item.ArtistId">Detalles</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ArtistId">Borrar</a>
+                        <a asp-action="DiscoArtista" asp-route-id="@item.ArtistId">Discos de Artista </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
-    </tbody>
-</table>
+else
+{
+   <h1>Tienes que estar logeado </h1>
+   <a class="link-success bg-dark" asp-area="Identity" asp-page="/Account/Login">Login </a>
+}

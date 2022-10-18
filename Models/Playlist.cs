@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace AT02_4_GaldonMario_Musica.Models
+namespace MusicaAut_GaldonMario.Models
 {
     [Table("Playlist")]
     public partial class Playlist

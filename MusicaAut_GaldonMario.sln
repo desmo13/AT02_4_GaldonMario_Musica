@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AT02_4_GaldonMario_Musica", "AT02_4_GaldonMario_Musica.csproj", "{969155EB-AE59-4058-9608-4A9B7CD79D4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicaAut_GaldonMario", "MusicaAut_GaldonMario.csproj", "{969155EB-AE59-4058-9608-4A9B7CD79D4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
