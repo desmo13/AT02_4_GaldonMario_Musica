@@ -2,6 +2,7 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
@@ -21,25 +22,35 @@ namespace MusicaAut_GaldonMario.Models
         public int CustomerId { get; set; }
         [Required]
         [StringLength(40)]
+        [DisplayName("Nombre")]
         public string FirstName { get; set; }
         [Required]
         [StringLength(20)]
+        [DisplayName("Apellido")]
         public string LastName { get; set; }
         [StringLength(80)]
+        [DisplayName("Compa;ia")]
         public string Company { get; set; }
         [StringLength(70)]
+        [DisplayName("Direccion")]
         public string Address { get; set; }
         [StringLength(40)]
+        [DisplayName("Ciudad")]
         public string City { get; set; }
         [StringLength(40)]
+        [DisplayName("Estado")]
         public string State { get; set; }
         [StringLength(40)]
+        [DisplayName("Pais")]
         public string Country { get; set; }
         [StringLength(10)]
+        [DisplayName("CodigoPostal")]
         public string PostalCode { get; set; }
         [StringLength(24)]
+        [DisplayName("Numero de Telefono")]
         public string Phone { get; set; }
         [StringLength(24)]
+        [DisplayName("Fax")]
         public string Fax { get; set; }
         [Required]
         [StringLength(60)]

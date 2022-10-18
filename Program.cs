@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MusicaAut_GaldonMario.Areas.Identity.Data;
 using MusicaAut_GaldonMario.Models;
@@ -12,6 +13,7 @@ builder.Services.AddDbContext<AuthContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AuthContextConnection")));
 
 builder.Services.AddDefaultIdentity<AuthUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AuthContext>();
 var app = builder.Build();
 
