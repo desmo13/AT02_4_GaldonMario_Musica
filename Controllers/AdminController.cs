@@ -29,7 +29,7 @@ namespace MusicaAut_GaldonMario.Controllers
         [Authorize(Roles = "Manager,Administrator")]
         public async Task<IActionResult> CustomerList()
         {
-            var chinookContext = _context.Customers.Include(c => c.SupportRep);
+            var chinookContext = _context.Customers.Include(c => c.SupportRep).Take(15).OrderByDescending(a=>a.CustomerId);
             return View(await chinookContext.ToListAsync());
         }
         // GET: Admin/Details/5
@@ -219,8 +219,12 @@ namespace MusicaAut_GaldonMario.Controllers
             {
                 try
                 {
+                    var usuarioBaseDatos = _authContext.Users.Find(Id);
+                    _authContext.Users.Remove(usuarioBaseDatos);    
                     //user.LockoutEnd = _authContext.Users.LockoutEnd.find()
-                    _authContext.Update(user);
+
+                    _authContext.Users.Add(user);
+                   
                     await _authContext.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

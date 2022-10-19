@@ -12,7 +12,7 @@ builder.Services.AddSqlServer<ChinookContext>(builder.Configuration.GetConnectio
 builder.Services.AddDbContext<AuthContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AuthContextConnection")));
 
-builder.Services.AddDefaultIdentity<AuthUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<AuthUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AuthContext>();
 var app = builder.Build();
