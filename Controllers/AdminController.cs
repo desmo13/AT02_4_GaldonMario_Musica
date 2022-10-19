@@ -135,7 +135,7 @@ namespace MusicaAut_GaldonMario.Controllers
         }
 
         // GET: Admin/Delete/5
-        [Authorize(Roles = "Manager,Administrator")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Customers == null)
